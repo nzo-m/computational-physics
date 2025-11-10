@@ -17,5 +17,5 @@ while t <= tmax:
 plot(ts, vs,
     title="Terminal Velocity",
     xlabel="Time (s)",
-    ylabel="Horizontal Distance x (m)",
-    labels=["x(t)"])
+    ylabel="Velocity (m/s)",
+    labels=["tv(t)"])
