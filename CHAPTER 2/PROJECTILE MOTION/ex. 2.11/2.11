@@ -1,0 +1,10 @@
+*2.11. In warfare you generally want to hit a particular target
+(as opposed to having the cannon shells land indiscriminately).
+However, this is not easy, since very small changes in any of the
+parameters can lead to large changes in the landing site of the shell.
+Investigate this by calculating how much the range of the cannon
+shell considered in this section would change if the initial speed
+is increased by 1 percent. Also compute the change in the range if
+there is a slight (10 km/h) wind (this effect can be added using the
+methods developed in the next section). You should find that even
+these relatively small changes alter the landing site by quite significant amounts.
