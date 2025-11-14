@@ -1,41 +1,39 @@
 import numpy as np
-from nzo import plot
+import matplotlib.pyplot as plt
+import scienceplots
 
-v0 = 700
+plt.style.use(['science','grid','bright'])
+plt.figure(figsize=(12,8))
+
 g = 9.8
+v0 = 700
+dt = 0.01
 angles = [30, 35, 40, 45, 50, 55]
-h = 0.1
-tf = 150
-
-xs = []
-ys = []
-labels = []
 
 for angle in angles:
-    theta = np.radians(angle)
-    vx = v0 * np.cos(theta)
-    vy = v0 * np.sin(theta)
+    anglerad = np.radians(angle)
+    vx = v0*np.cos(anglerad)
+    vy = v0 * np.sin(anglerad)
 
-    ti = np.arange(0, tf + h, h)
-    xi = np.zeros_like(ti)
-    yi = np.zeros_like(ti)
+    xs, ys = [0], [0]
+    vycurrent = vy
 
-    for n in range(len(ti) - 1):
-        xi[n + 1] = xi[n] + h * vx
-        vy -= g * h
-        yi[n + 1] = yi[n] + h * vy
-        if yi[n + 1] < 0:
-            xi = xi[:n + 2]
-            yi = yi[:n + 2]
-            break
+    while ys[-1] >= 0:
+        vycurrent = vycurrent - g*dt
+        xs.append(xs[-1] + vx*dt)
+        ys.append(ys[-1] + vycurrent*dt)
 
-    xs.append(xi / 1000)
-    ys.append(yi / 1000)
-    labels.append(f"{angle}°")
+    tflight = 2 * vy / g
+    ts = np.linspace(0, tflight, 500)
+    xexact = vx * ts
+    yexact = vy * ts - 0.5 * g * ts**2
 
-plot(
-    *sum(zip(xs, ys), ()),
-    title="Euler Trajectories (No Air Resistance)",
-    xlabel="Horizontal Distance x (km)",
-    ylabel="Vertical Height y (km)",
-    labels=labels)
+    plt.plot(np.array(xs)/1000, np.array(ys)/1000, label=f"Euler {angle}°", lw=2)
+    plt.plot(xexact/1000, yexact/1000, '--', label=f"Exact {angle}°", lw=2)
+
+plt.xlabel("x (km)")
+plt.ylabel("y (km)")
+plt.title("Projectile Motion")
+plt.legend()
+plt.savefig("trajectories-no-air.png", dpi=300, bbox_inches='tight')
+plt.show()
