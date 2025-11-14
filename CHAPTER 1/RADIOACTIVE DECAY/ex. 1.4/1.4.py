@@ -16,8 +16,8 @@ fig, axes = plt.subplots(1, 3, figsize=(15,4))
 fig.suptitle("Radioactive Decay with Varying Ratios")
 
 for i in range(3):
-    NA = np.zeros_like(ts, dtype=float)
-    NB = np.zeros_like(ts, dtype=float)
+    NA = np.zeros_like(ts)
+    NB = np.zeros_like(ts)
 
     NA[0] = NA0
     NB[0] = NB0
