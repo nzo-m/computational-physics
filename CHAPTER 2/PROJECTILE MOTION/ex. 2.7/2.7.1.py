@@ -1,5 +1,9 @@
 import numpy as np
-from nzo import plot
+import matplotlib.pyplot as plt
+import scienceplots
+
+plt.style.use(['science','grid','bright'])
+plt.figure(figsize=(12,8))
 
 g = 9.8
 v0 = 700
@@ -13,13 +17,13 @@ dt = 0.1
 tmax = 300
 angles = [30, 45]
 
-def p_isothermal(y):
+def pIsothermal(y):
     return p0 * np.exp(-y / y0)
 
-def p_adiabatic(y):
+def pAdiabatic(y):
     return p0 * (1 - a * y / T0) ** alpha
 
-def approx(angleshoot, iso_or_adi):
+def approx(angleshoot, p_IsoAdi):
     theta = np.radians(angleshoot)
     vx, vy = v0 * np.cos(theta), v0 * np.sin(theta)
     x, y = 0, 0
@@ -29,7 +33,7 @@ def approx(angleshoot, iso_or_adi):
 
     while t < tmax and y >= 0:
         v = np.sqrt(vx**2 + vy**2)
-        p = iso_or_adi(y)
+        p = p_IsoAdi(y)
         ax = -B2 * p * v * vx
         ay = -g - B2 * p * v * vy
         vx += ax * dt
@@ -42,28 +46,28 @@ def approx(angleshoot, iso_or_adi):
 
     return xs, ys
 
-trajectories = []
-labels = []
+iso = []
+adi = []
 
 for angle in angles:
-    xs_iso, ys_iso = approx(angle, p_isothermal)
-    xs_adi, ys_adi = approx(angle, p_adiabatic)
+    xs_iso, ys_iso = approx(angle, pIsothermal)
+    xs_adi, ys_adi = approx(angle, pAdiabatic)
 
-    trajectories.append((xs_iso, ys_iso))
-    trajectories.append((xs_adi, ys_adi))
+    iso.append((xs_iso, ys_iso))
+    adi.append((xs_adi, ys_adi))
 
-    labels.append(f"{angle}° Isothermal")
-    labels.append(f"{angle}° Adiabatic")
+for i, angle in enumerate(angles):
+    xs_iso, ys_iso = iso[i]
+    xs_adi, ys_adi = adi[i]
 
+    plt.plot(np.array(xs_iso)/1000, np.array(ys_iso)/1000,
+             '-', label=f'Isothermal {angle}°', lw=2)
+    plt.plot(np.array(xs_adi)/1000, np.array(ys_adi)/1000,
+             '--', label=f'Adiabatic {angle}°', lw=2)
 
-plotprep = []
-for xs, ys in trajectories:
-    plotprep.extend([xs, ys])
-
-plot(
-    *plotprep,
-    labels=labels,
-    title="Cannon Shell Trajectories",
-    xlabel="Distance (km)",
-    ylabel="Height (km)",
-)
+plt.xlabel("Distance (km)")
+plt.ylabel("Height (km)")
+plt.title("Trajectories (Isothermal vs. Adiabatic)")
+plt.legend()
+plt.savefig("adi-vs-iso", dpi=300, bbox_inches='tight')
+plt.show()
