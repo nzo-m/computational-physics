@@ -30,7 +30,6 @@ plt.plot(ts_exact, vs_exact, '--', label='Exact Solution', lw=2)
 plt.xlabel('Time(s)')
 plt.ylabel('Velocity (m/s)')
 plt.title('Free Fall (Euler vs. Exact)')
-plt.savefig("free-fall.png", dpi=300, bbox_inches='tight')
 plt.legend()
+plt.savefig("free-fall.png", dpi=300, bbox_inches='tight')
 plt.show()
-
