@@ -1,0 +1,21 @@
+2.13. Construct a program to calculate the trajectory of a baseball,
+as in Figure 2.7. Use it to investigate the following questions:
+
+(a) Calculate the range at sea level, with no wind, of a ball hit at
+110 mph for different initial angles. Determine to within 1° the angle
+that gives the maximum range.
+
+(b) Determine the initial angles that give the maximum range for a ball
+hit at 110 mph into a 25-mph head wind, and with a 25-mph tail wind.
+What are the maximum ranges in the two cases?
+
+(c) In all of our calculations we have assumed that the initial velocity
+is 110 mph, a value typical for a good power hitter. How much does the
+range depend on this value? Calculate the range for initial velocities
+of 120 and 100 mph. How does the range scale with the initial kinetic
+energy of the ball and why?
+
+(d) Calculate how much a fastball slows
+down on its way to home plate. Assume a pitch that leaves the pitcher’s
+hand at 100 mph and find its speed when it crosses home plate, which is
+60.5 ft away.
