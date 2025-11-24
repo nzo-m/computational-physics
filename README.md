@@ -1,1 +1,1 @@
-This repository serves to document my work and practice on the exercises presented in the 2nd edition of Computational Physics by H. Nakanishi and N. Giordano. Personal notes and conceptual dive-ins are included to help consolidate my understanding of the concepts.
+This repository serves to document my work and practice on the exercises presented in the 2nd edition of "Computational Physics" by H. Nakanishi and N. Giordano. Personal notes and conceptual dive-ins are included to help consolidate my understanding of the concepts.
